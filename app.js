@@ -11,12 +11,28 @@ const promptUser = () => {
     {
       type: "input",
       name: "name",
-      message: "What is your name?"
+      message: "What is your name? (Required)",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("Please enter your name!");
+          return false;
+        }
+      }
     },
     {
       type: "input",
       name: "github",
-      message: "Enter your GitHub Username"
+      message: "Enter your GitHub Username (Required)",
+      validate: gitInput => {
+        if (gitInput) {
+          return true;
+        } else {
+          console.log("Please enter your GitHub Username!");
+          return false;
+        }
+      }
     },
     {
       type: "input",
@@ -38,12 +54,28 @@ const promptProject = portfolioData => {
     {
       type: 'input',
       name: 'name',
-      message: 'What is the name of your project?'
+      message: 'What is the name of your project? (Required)',
+      validate: projectNameInput => {
+        if (projectNameInput) {
+          return true;
+        } else {
+          console.log("Please enter your project name!");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'description',
-      message: 'Provide a description of the project (Required)'
+      message: 'Provide a description of the project (Required)',
+      validate: projectDescriptionInput => {
+        if (projectDescriptionInput) {
+          return true;
+        } else {
+          console.log("Please describe your project!");
+          return false;
+        }
+      }
     },
     {
       type: 'checkbox',
@@ -54,7 +86,15 @@ const promptProject = portfolioData => {
     {
       type: 'input',
       name: 'link',
-      message: 'Enter the GitHub link to your project. (Required)'
+      message: 'Enter the GitHub link to your project. (Required)',
+      validate: projectLinkInput => {
+        if (projectLinkInput) {
+          return true;
+        } else {
+          console.log("Please provide your project link!");
+          return false;
+        }
+      }
     },
     {
       type: 'confirm',
@@ -69,14 +109,14 @@ const promptProject = portfolioData => {
       default: false
     }
   ])
-  .then(projectData => {
-    portfolioData.projects.push(projectData);
-    if (projectData.confirmAddProject) {
-      return promptProject(portfolioData);
-    } else {
-      return portfolioData;
-    }
-  })
+    .then(projectData => {
+      portfolioData.projects.push(projectData);
+      if (projectData.confirmAddProject) {
+        return promptProject(portfolioData);
+      } else {
+        return portfolioData;
+      }
+    })
 };
 
 // call the functions and chain the promises to output as console logs
