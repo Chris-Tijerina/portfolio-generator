@@ -79,9 +79,6 @@ const promptProject = portfolioData => {
   })
 };
 
-
-
-
 // call the functions and chain the promises to output as console logs
 promptUser()
   .then(promptProject)
